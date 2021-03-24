@@ -23,7 +23,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50% , -50%);
-            display: inline;
+            display: none;
         }
         #listAPI{
             background-color: rgb(240, 239, 228);
@@ -77,20 +77,21 @@
                     console.log(response);
                     return response.json();
                 })
-                /*
                
-                
                 .then(response => {
-                    console.log(response.activity);
-                    document.getElementById("errorID").innerHTML = response.activity;
-                })*/
+                    let result = Object.keys(response);
+                    console.log(result);
+                    document.getElementById("errorID").innerHTML = result[0];
+                })
+                 /*
                 .then(response => {
-                    var result = JSON.stringify(response);
+                    let result = JSON.stringify(response);
                     console.log (result);
                     document.getElementById("errorID").innerHTML = result;
                     var obj = JSON.parse(result);
                     document.getElementById("errorID").innerHTML = obj.activity;
                 })
+                */
                 .catch(error => {
                     console.log("ERROR");
                     console.error(error);
@@ -105,58 +106,13 @@
             buttonOne.style.animation = "fadeOut 1s";
             setTimeout(() => {
                 document.getElementById("button").style.display = "none";
-            }, 900);
- 
-            let welcomeSign = [document.createElement("h1"), document.createTextNode("Welcome!")];
-            welcomeSign[0].id = "welcome";
-            
- 
-            let menuDiv = document.createElement('div');
-            menuDiv.id = "menuDiv";
- 
-            let inputElem = document.createElement('input');
-            inputElem.id = "fetchInput";
-            inputElem.type = "text";
-            inputElem.placeholder = "Enter API Here";
- 
-            let listAPI = document.createElement('div');
-            listAPI.id = "listAPI";
- 
-            let paragraph = [document.createElement('p'), document.createTextNode("https://www.boredapi.com/api/activity")];
- 
-            let submitButton = document.createElement('button');
-            submitButton.id = "submitButton";
-            submitButton.onclick = () => fetchHandler();
-            let submitText = document.createTextNode("Submit");
-            
-            let errorvar = document.createElement('div');
-            errorvar.id = "errorID";
- 
-            let space = document.createElement('br');
-            
-            setTimeout(() => {
-                document.body.appendChild(menuDiv);
+
+                const menudiv = document.getElementById("menuDiv");
+                menudiv.style.display = "inline";
                 menuDiv.style.animation = "fadeIn 1s";
- 
-                menuDiv.appendChild(welcomeSign[0]);
-                welcomeSign[0].appendChild(welcomeSign[1]);
-
-                menuDiv.appendChild(inputElem);
-                menuDiv.appendChild(listAPI);
- 
-                listAPI.appendChild(paragraph[0]);
-                paragraph[0].appendChild(paragraph[1]);
-                
-                menuDiv.appendChild(space);
- 
-                menuDiv.appendChild(submitButton);
-                submitButton.appendChild(submitText);
-
-                menuDiv.appendChild(space);
- 
-                menuDiv.appendChild(errorvar);
-            }, 1000);    
-            console.log("Set up complete");
+            }, 900);
+            
+            
         }
 
  
@@ -182,6 +138,24 @@
     
     <div class="button">
         <button id="button"; onclick = "setItUp()">Click Me</button>
+    </div>
+
+    <div id="menuDiv">
+        <h1>Welcome!</h1>
+        <input id="fetchInput"; type="text" ; placeholder="Enter API Here">
+
+        <div id="listAPI">
+            <p>https://www.boredapi.com/api/activity</p>
+        </div>
+
+        <br>
+
+        <button id="submitButton"; onclick ="fetchHandler()">Submit</button>
+
+        <br>
+
+        <div id = "errorID"></div>
+
     </div>
     
 </body>
