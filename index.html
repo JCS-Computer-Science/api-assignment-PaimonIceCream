@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+ 
+<html lang="en">
+ 
+<head>
+    <meta charset="UTF-8">
+ 
+    <title>Fetch Function</title>
+ 
+    <!--<link rel="stylesheet" href="style.css">-->
+    <style>
+        body{
+            background-color: rgb(174, 228, 210);
+        }
+        div.button{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50% , -50%);
+        }
+        #menuDiv{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50% , -50%);
+            display: inline;
+        }
+        #listAPI{
+            background-color: rgb(240, 239, 228);
+            height: 300px;
+            width: 500px;
+        }
+        #button{
+            background-color: rgb(247, 228, 62);
+            height: 100px;
+            width: 200px;
+            border: 6px double cadetblue;
+            border-radius: 10px;
+            font-family: Arial, sans-serif;
+            font-size: 25px;
+            text-shadow: 1px 1px green;
+            transition: transform 1s;
+        }
+        #promiseHere{
+            font-family: Arial, sans-serif;
+            font-size: 25px;
+            color:blue;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50% , -50%);
+        }
+        #errorID{
+            transition: transform 1s;
+        }
+        @keyframes fadeIn{
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+        @keyframes fadeOut{
+            from {opacity: 1;}
+            to {opacity: 0;}
+        }
+    </style>
+    
+</head>
+ 
+<body>
+    <!--<script src="app.js"></script>--> 
+    <script>
+        function fetchHandler() {
+            console.log("Fetch");
+            var url = document.getElementById("fetchInput").value;
+            console.log(url);
+            fetch(url)  
+                .then(response => { 
+                    console.log(response);
+                    return response.json();
+                })
+                /*
+               
+                
+                .then(response => {
+                    console.log(response.activity);
+                    document.getElementById("errorID").innerHTML = response.activity;
+                })*/
+                .then(response => {
+                    var result = JSON.stringify(response);
+                    console.log (result);
+                    document.getElementById("errorID").innerHTML = result;
+                    var obj = JSON.parse(result);
+                    document.getElementById("errorID").innerHTML = obj.activity;
+                })
+                .catch(error => {
+                    console.log("ERROR");
+                    console.error(error);
+                    document.getElementById("errorID").innerHTML = "Please submit a valid response.";
+                });        
+        }
+        
+        /* Sets up the main menu */
+        function setItUp(){
+            const buttonOne = document.getElementById("button")
+            buttonOne.style.transform = "translateY(-100%)";
+            buttonOne.style.animation = "fadeOut 1s";
+            setTimeout(() => {
+                document.getElementById("button").style.display = "none";
+            }, 900);
+ 
+            let welcomeSign = [document.createElement("h1"), document.createTextNode("Welcome!")];
+            welcomeSign[0].id = "welcome";
+            
+ 
+            let menuDiv = document.createElement('div');
+            menuDiv.id = "menuDiv";
+ 
+            let inputElem = document.createElement('input');
+            inputElem.id = "fetchInput";
+            inputElem.type = "text";
+            inputElem.placeholder = "Enter API Here";
+ 
+            let listAPI = document.createElement('div');
+            listAPI.id = "listAPI";
+ 
+            let paragraph = [document.createElement('p'), document.createTextNode("https://www.boredapi.com/api/activity")];
+ 
+            let submitButton = document.createElement('button');
+            submitButton.id = "submitButton";
+            submitButton.onclick = () => fetchHandler();
+            let submitText = document.createTextNode("Submit");
+            
+            let errorvar = document.createElement('div');
+            errorvar.id = "errorID";
+ 
+            let space = document.createElement('br');
+            
+            setTimeout(() => {
+                document.body.appendChild(menuDiv);
+                menuDiv.style.animation = "fadeIn 1s";
+ 
+                menuDiv.appendChild(welcomeSign[0]);
+                welcomeSign[0].appendChild(welcomeSign[1]);
+
+                menuDiv.appendChild(inputElem);
+                menuDiv.appendChild(listAPI);
+ 
+                listAPI.appendChild(paragraph[0]);
+                paragraph[0].appendChild(paragraph[1]);
+                
+                menuDiv.appendChild(space);
+ 
+                menuDiv.appendChild(submitButton);
+                submitButton.appendChild(submitText);
+
+                menuDiv.appendChild(space);
+ 
+                menuDiv.appendChild(errorvar);
+            }, 1000);    
+            console.log("Set up complete");
+        }
+
+ 
+        // Changes the colour of the button
+        setInterval(() => {
+            var letters = "0123456789ABCDEF";
+            var color = '#';
+            for(let i = 0; i < 6; i++){
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            document.getElementById("button").style.backgroundColor = color;
+ 
+            letters = "0123456789ABCDEF";
+            color = '#';
+            for(let i = 0; i < 6; i++){
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            document.getElementById("button").style.borderColor = color;
+        }, 750)
+ 
+ 
+    </script>
+    
+    <div class="button">
+        <button id="button"; onclick = "setItUp()">Click Me</button>
+    </div>
+    
+</body>
+ 
+</html>

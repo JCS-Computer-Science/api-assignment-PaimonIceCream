@@ -1,0 +1,20 @@
+body{
+    background-color: rgb(174, 228, 210);
+}
+#button{
+    background-color: rgb(247, 228, 62);
+    height: 100px;
+    width: 200px;
+    border: 6px double cadetblue;
+    border-radius: 10px;
+    font-family: Arial, sans-serif;
+    font-size: 25px;
+    text-shadow: 1px 1px green;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50% , -50%); 
+}
+button:hover{
+    background-color: rgb(255, 247, 177);
+}
