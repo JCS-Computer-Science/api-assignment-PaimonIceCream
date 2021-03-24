@@ -91,6 +91,8 @@
                     var obj = JSON.parse(result);
                     document.getElementById("errorID").innerHTML = obj.activity;
                 })
+               
+                Array.forEach()
                 */
                 .catch(error => {
                     console.log("ERROR");
@@ -142,6 +144,7 @@
 
     <div id="menuDiv">
         <h1>Welcome!</h1>
+        <h2>This is a little something that fetches data from an API.</h2>
         <input id="fetchInput"; type="text" ; placeholder="Enter API Here">
 
         <div id="listAPI">
