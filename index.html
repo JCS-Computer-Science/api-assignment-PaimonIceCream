@@ -24,6 +24,7 @@
             left: 50%;
             transform: translate(-50% , -50%);
             display: none;
+            text-align: center;
         }
         #listAPI{
             background-color: rgb(240, 239, 228);
@@ -79,15 +80,16 @@
                 .then(response => {
                     let result = Object.keys(response);
                     document.getElementById("keyID").innerHTML = " ";
-                    result.forEach( (key) =>  {
-                        document.getElementById("keyID").innerHTML += key + " ";
+                    result.forEach((key) =>  {
+                        //document.getElementById("keyID").innerHTML += key + " ";
                     })
-                    var whichKey = document.getElementById("keyInput").value; 
-                    console.log(whichKey);
+                   
                     
                     let stringify = JSON.stringify(response);
                     console.log (stringify);
-                    document.getElementById("valueID").innerHTML = stringify;
+                    //document.getElementById("valueID").innerHTML = stringify;
+
+                   
                     //var obj = JSON.parse(response);
                     //console.log (obj);
                     //document.getElementById("valueID").innerHTML = obj.whichKey;
@@ -98,6 +100,7 @@
                 .catch(error => {
                     console.log("ERROR");
                     console.error(error);
+                    document.getElementById("keyID").innerHTML = " ";
                     document.getElementById("valueID").innerHTML = "Please submit a valid response.";
                 });        
         }
@@ -147,7 +150,7 @@
         <h1>Welcome!</h1>
         <h2>This is a little something that fetches data from an API.</h2>
         <input id="fetchInput"; type="text" ; placeholder="Enter API Here">
-        <input id="keyInput"; type="text" ; placeholder="Enter Key Here">
+        <select id="keyInput"; placeholder="Enter Key Here"></select>
 
         <div id="listAPI">
             <p>https://www.boredapi.com/api/activity</p>
