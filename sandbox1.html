@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title>Sandbox</title>
+
+<style>
+    
+</style>
+
+</head>
+
+<body>
+
+<div id="primeDiv"> 
+    <input type="number"; id="input">
+    <button id="button"; onclick ="showPrimes()">Find the Primes up to Your Desired Number</button>
+    <div id="div">
+        
+    </div>
+</div>
+
+
+<script>
+	function showPrimes(){
+        let max = document.getElementById("input").value;
+        var i;
+        for(i = 1; i <= max ; i++){
+            var boolean = true;
+            for(var x = 1; x <= i; x++){
+                var quotient = i / x;
+                var roundedQuotient = Math.round(quotient)
+                if(quotient != i && quotient != 1 ){
+                    if(quotient == roundedQuotient){
+                        boolean = false;
+                    }
+                }
+                if(boolean == true && x == i &&  i != 1){
+                    let newNum = [document.createElement("p"), document.createTextNode(i)];
+                    newNum[0].className = "number";
+                    let div = document.getElementById("div");
+                    div.appendChild(newNum[0]);
+                    newNum[0].appendChild(newNum[1]);
+                }
+            
+            }
+
+        }
+    }
+</script>
+
+</body>
+</html>

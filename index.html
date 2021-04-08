@@ -70,9 +70,7 @@
     <!--<script src="app.js"></script>--> 
     <script>
         function fetchHandler() {
-            console.log("Fetch");
             var url = document.getElementById("fetchInput").value;
-            console.log(url);
             fetch(url)  
                 .then(response => { 
                     return response.json();
@@ -80,6 +78,8 @@
                 .then(response => {
                     let result = Object.keys(response);
                     document.getElementById("keyID").innerHTML = " ";
+
+                    const dropdown = document.getElementById("keySelect");
                     result.forEach((key) =>  {
                         //document.getElementById("keyID").innerHTML += key + " ";
                     })
@@ -150,7 +150,9 @@
         <h1>Welcome!</h1>
         <h2>This is a little something that fetches data from an API.</h2>
         <input id="fetchInput"; type="text" ; placeholder="Enter API Here">
-        <select id="keyInput"; placeholder="Enter Key Here"></select>
+        <select id="keySelect"; placeholder="Enter Key Here">
+            <option value="unselected">Please Select a Key</option>
+        </select>
 
         <div id="listAPI">
             <p>https://www.boredapi.com/api/activity</p>
