@@ -81,22 +81,21 @@
 
                     const dropdown = document.getElementById("keySelect");
                     result.forEach((key) =>  {
-                        //document.getElementById("keyID").innerHTML += key + " ";
-                    })
-                   
-                    
-                    let stringify = JSON.stringify(response);
-                    console.log (stringify);
-                    //document.getElementById("valueID").innerHTML = stringify;
+                        
+                        var option = document.createElement("option");
 
-                   
-                    //var obj = JSON.parse(response);
-                    //console.log (obj);
-                    //document.getElementById("valueID").innerHTML = obj.whichKey;
-                     
-                    
-                })
-                 
+                        option.value = key;
+                        option.textContent = key;
+                        dropdown.appendChild(option);
+                    })
+
+                    /* 
+                    console.log("test")
+                    var key = document.getElementById("dropdown").value
+                    document.getElementById("result").innerHTML = result[key]
+                    result[key]
+                    */
+                }) 
                 .catch(error => {
                     console.log("ERROR");
                     console.error(error);
@@ -153,6 +152,7 @@
         <select id="keySelect"; placeholder="Enter Key Here">
             <option value="unselected">Please Select a Key</option>
         </select>
+        <button id="submitButton"; onclick ="fetchHandler()">Submit</button>
 
         <div id="listAPI">
             <p>https://www.boredapi.com/api/activity</p>
@@ -160,7 +160,6 @@
 
         <br>
 
-        <button id="submitButton"; onclick ="fetchHandler()">Submit</button>
 
         <br>
 
