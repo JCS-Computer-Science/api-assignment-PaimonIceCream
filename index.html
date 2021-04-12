@@ -71,11 +71,19 @@
     <script>
         function fetchHandler() {
             var url = document.getElementById("fetchInput").value;
+            
             fetch(url)  
                 .then(response => { 
+                    document.getElementById("valueID").innerHTML = " ";
                     return response.json();
                 })   
                 .then(response => {
+                    let nodeList = document.getElementsByTagName("option").length;
+                    for (var i = 0; i < nodeList; i++){
+                        let select = document.getElementById("keySelect");
+                        select.remove(0);
+                    }
+
                     
                     let result = Object.keys(response);
                     
@@ -191,6 +199,7 @@
 
         <div id="listAPI">
             <p>https://www.boredapi.com/api/activity</p>
+            <p>https://cat-fact.herokuapp.com/facts/random</p>
         </div>
 
         <br>

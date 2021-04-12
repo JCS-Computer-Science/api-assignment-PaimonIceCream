@@ -1,6 +1,25 @@
 body{
     background-color: rgb(174, 228, 210);
 }
+div.button{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50% , -50%);
+}
+#menuDiv{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50% , -50%);
+    display: none;
+    text-align: center;
+}
+#listAPI{
+    background-color: rgb(240, 239, 228);
+    height: 300px;
+    width: 500px;
+}
 #button{
     background-color: rgb(247, 228, 62);
     height: 100px;
@@ -10,11 +29,25 @@ body{
     font-family: Arial, sans-serif;
     font-size: 25px;
     text-shadow: 1px 1px green;
+    transition: transform 1s;
+}
+#promiseHere{
+    font-family: Arial, sans-serif;
+    font-size: 25px;
+    color:blue;
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50% , -50%); 
+    transform: translate(-50% , -50%);
 }
-button:hover{
-    background-color: rgb(255, 247, 177);
+#errorID{
+    transition: transform 1s;
+}
+@keyframes fadeIn{
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+@keyframes fadeOut{
+    from {opacity: 1;}
+    to {opacity: 0;}
 }
