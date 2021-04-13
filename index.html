@@ -84,7 +84,6 @@
                         select.remove(0);
                     }
 
-                    
                     let result = Object.keys(response);
                     
                     const dropdown = document.getElementById("keySelect");
@@ -97,12 +96,12 @@
                         dropdown.appendChild(option);
                     })
 
-                    /* 
+                    
                     console.log("test")
-                    var key = document.getElementById("dropdown").value
+                    var key = document.getElementById("keySelect").value
                     document.getElementById("result").innerHTML = result[key]
                     result[key]
-                    */
+                    
                 }) 
                 .catch(error => {
                     console.log("ERROR");
@@ -192,7 +191,7 @@
         <h1>Welcome!</h1>
         <h2>This is a little something that fetches data from an API.</h2>
         <input id="fetchInput"; type="text" ; placeholder="Enter API Here">
-        <select id="keySelect"; placeholder="Enter Key Here">
+        <select id="keySelect">
             <option id="unselected"; value="unselected">Please Select a Key</option>
         </select>
         <button id="submitButton"; onclick ="fetchHandler()">Find Keys</button>

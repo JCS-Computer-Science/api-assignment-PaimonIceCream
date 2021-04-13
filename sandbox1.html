@@ -13,7 +13,7 @@
 </head>
 
 <body>
-
+<!--
 <div id="primeDiv"> 
     <input type="number"; id="input">
     <button id="button"; onclick ="showPrimes()">Find the Primes up to Your Desired Number</button>
@@ -22,8 +22,13 @@
     </div>
 </div>
 
+-->
+<button id="button"; onclick="getData()">Click Me</button>
+<select id="dropdown"></select>
+<p id="result"></p>
 
 <script>
+    /*
 	function showPrimes(){
         let max = document.getElementById("input").value;
         var i;
@@ -48,7 +53,34 @@
             }
 
         }
+    }*/
+    var arr = ["a", "b", "c"]
+
+    var result = {
+        a: "studying",
+        b: "driving",
+        c: "gaming"
     }
+
+    function getData() {
+        var dropdown = document.getElementById("dropdown")
+
+        arr.forEach(element => {
+            var option = document.createElement("option")
+
+        option.value = element
+        option.textContent = element
+        dropdown.appendChild(option)
+        });
+    }
+
+    function selected() {
+        console.log("test")
+        var key = document.getElementById("dropdown").value
+        document.getElementById("result").innerHTML = result[key]
+        result[key]
+    }
+
 </script>
 
 </body>
