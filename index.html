@@ -70,6 +70,7 @@
     <!--<script src="app.js"></script>--> 
     <script>
         var globalJSON;
+        var removeBoolean;
         function fetchHandler() {
             var url = document.getElementById("fetchInput").value;
             
@@ -80,25 +81,32 @@
                 })   
                 .then(response => {
                     let nodeList = document.getElementsByTagName("option").length;
+                    
                     for (var i = 0; i < nodeList; i++){
                         let select = document.getElementById("keySelect");
                         select.remove(0);
                     }
+
+                    const unselectedOption = document.createElement("option");
+                    unselectedOption.id = "unselected";
+                    unselectedOption.value = "unselcted";
+                    unselectedOption.textContent = "Please Select a Key";
+                    document.getElementById("keySelect").appendChild(unselectedOption);
 
                     let result = Object.keys(response);
                     
                     const dropdown = document.getElementById("keySelect");
                     result.forEach((key) =>  {
                         
-                        var option = document.createElement("option");
-
+                        let option = document.createElement("option");
+                        option.id = key;
                         option.value = key;
                         option.textContent = key;
                         dropdown.appendChild(option);
                     })
 
                     globalJSON = response;
-                    
+                    removeBoolean = true;
                     
                 }) 
                 .catch(error => {
@@ -109,9 +117,13 @@
         }
 
         function fetchChange(){
-            console.log("test");
+            if(removeBoolean == true){
+                let select = document.getElementById("keySelect");
+                select.remove(0);
+                removeBoolean = false;
+            }
             var whichKey = document.getElementById("keySelect").value;
-            document.getElementById("valueID").innerHTML = globalJSON.whichKey;
+            document.getElementById("valueID").innerHTML = globalJSON[whichKey];
             globalJSON[whichKey]
             console.log(globalJSON);
         }
@@ -162,7 +174,7 @@
         <h2>This is a little something that fetches data from an API.</h2>
         <input id="fetchInput"; type="text" ; placeholder="Enter API Here">
         <select onchange="fetchChange()"; id="keySelect">
-            <option id="unselected"; value="unselected">Please Select a Key</option>
+            <option id="unselected"; value="unselected">Please Enter a URL</option>
         </select>
         <button id="submitButton"; onclick ="fetchHandler()">Submit</button>
 

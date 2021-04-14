@@ -48,25 +48,13 @@ function finalFetch(){
             return response.json();
         })   
         .then(response => {
-            let result = Object.keys(response);
             //document.getElementById("valueID").innerHTML = response.activity;
 
-            const dropdown = document.getElementById("keySelect");
-            result.forEach((key) =>  {
-                
-                var option = document.createElement("option");
-
-                option.value = key;
-                option.textContent = key;
-                dropdown.appendChild(option);
-            })
-
-            /* 
             console.log("test")
-            var key = document.getElementById("dropdown").value
+            var key = document.getElementById("keySelect").value
             document.getElementById("result").innerHTML = result[key]
             result[key]
-            */
+            
         }) 
         .catch(error => {
             console.log("ERROR");
