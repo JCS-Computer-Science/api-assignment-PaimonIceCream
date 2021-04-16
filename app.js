@@ -1,3 +1,7 @@
+// Global variables
+var globalJSON;
+var removeBoolean;
+
 function fetchHandler() {
     var url = document.getElementById("fetchInput").value;
     
@@ -8,60 +12,58 @@ function fetchHandler() {
         })   
         .then(response => {
             let nodeList = document.getElementsByTagName("option").length;
+            
             for (var i = 0; i < nodeList; i++){
                 let select = document.getElementById("keySelect");
                 select.remove(0);
             }
 
-            
+            const unselectedOption = document.createElement("option");
+            unselectedOption.id = "unselected";
+            unselectedOption.value = "unselcted";
+            unselectedOption.textContent = "Please Select a Key";
+            document.getElementById("keySelect").appendChild(unselectedOption);
+
             let result = Object.keys(response);
             
             const dropdown = document.getElementById("keySelect");
             result.forEach((key) =>  {
                 
-                var option = document.createElement("option");
-
+                let option = document.createElement("option");
+                option.id = key;
                 option.value = key;
                 option.textContent = key;
                 dropdown.appendChild(option);
             })
 
-            /* 
-            console.log("test")
-            var key = document.getElementById("dropdown").value
-            document.getElementById("result").innerHTML = result[key]
-            result[key]
-            */
-        }) 
-        .catch(error => {
-            console.log("ERROR");
-            console.error(error);
-            document.getElementById("valueID").innerHTML = "Please submit a valid response.";
-        });        
-}
-
-function finalFetch(){
-    console.log("final Fetch");
-    var url = document.getElementById("fetchInput").value;
-    fetch(url)  
-        .then(response => { 
-            return response.json();
-        })   
-        .then(response => {
-            //document.getElementById("valueID").innerHTML = response.activity;
-
-            console.log("test")
-            var key = document.getElementById("keySelect").value
-            document.getElementById("result").innerHTML = result[key]
-            result[key]
+            globalJSON = response;
+            removeBoolean = true;
             
         }) 
         .catch(error => {
             console.log("ERROR");
             console.error(error);
             document.getElementById("valueID").innerHTML = "Please submit a valid response.";
-        });
-    
+            let nodeList = document.getElementsByTagName("option").length;
+            
+            for (var i = 0; i < nodeList; i++){
+                let select = document.getElementById("keySelect");
+                select.remove(0);
+            }
+            console.log("ERROR");
+        });        
+}
+
+function fetchChange(){
+    if(removeBoolean == true){
+        let select = document.getElementById("keySelect");
+        select.remove(0);
+        removeBoolean = false;
+    }
+    var whichKey = document.getElementById("keySelect").value;
+    document.getElementById("valueID").innerHTML = globalJSON[whichKey];
+    globalJSON[whichKey]
+    console.log(globalJSON);
 }
 
 /* Sets up the main menu */

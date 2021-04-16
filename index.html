@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
  
-    <title>API Fetcher</title>
+    <title>Custom API Fetcher</title>
  
     <!--<link rel="stylesheet" href="style.css">-->
     <style>
@@ -69,8 +69,10 @@
 <body>
     <!--<script src="app.js"></script>--> 
     <script>
+        // Global variables
         var globalJSON;
         var removeBoolean;
+
         function fetchHandler() {
             var url = document.getElementById("fetchInput").value;
             
@@ -112,7 +114,13 @@
                 .catch(error => {
                     console.log("ERROR");
                     console.error(error);
-                    document.getElementById("valueID").innerHTML = "Please submit a valid response.";
+                    document.getElementById("valueID").innerHTML = "Please submit a valid response";
+                    let nodeList = document.getElementsByTagName("option").length;
+            
+                    for (var i = 0; i < nodeList; i++){
+                        let select = document.getElementById("keySelect");
+                        select.remove(0);
+                    }
                 });        
         }
 
@@ -126,6 +134,10 @@
             document.getElementById("valueID").innerHTML = globalJSON[whichKey];
             globalJSON[whichKey]
             console.log(globalJSON);
+        }
+
+        function addAPI(){
+            
         }
         
         /* Sets up the main menu */
@@ -172,12 +184,17 @@
     <div id="menuDiv">
         <h1>Welcome!</h1>
         <h2>This is a little something that fetches data from an API.</h2>
-        <input id="fetchInput"; type="text" ; placeholder="Enter API Here">
+        <input id="fetchInput"; type="text" ; placeholder="Fetch API URL Here">
+        
         <select onchange="fetchChange()"; id="keySelect">
             <option id="unselected"; value="unselected">Please Enter a URL</option>
         </select>
         <button id="submitButton"; onclick ="fetchHandler()">Submit</button>
 
+        <br><br>
+
+        <input id="APIadd"; type="text"; placeholder="Store API URL Here">
+        <button id="addButton"; onclick ="addAPI()">Store Api</button>
         <div id="listAPI">
             <p>https://www.boredapi.com/api/activity</p>
             <p>https://cat-fact.herokuapp.com/facts/random</p>
