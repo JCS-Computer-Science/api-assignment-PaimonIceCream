@@ -139,15 +139,15 @@
         function addAPI(){
             let listAPI = document.getElementById("listAPI");
             let storeAPI = [document.createElement("p"), document.createTextNode(document.getElementById("APIadd").value)];
-            storeAPI[0].onclick = () => removeP(this); 
+            storeAPI[0].onclick = () => removeP(event);
 
             listAPI.appendChild(storeAPI[0]);
             storeAPI[0].appendChild(storeAPI[1]);
         }
 
-        function removeP(x){
+        function removeP(e){
             let listAPI = document.getElementById("listAPI");
-            listAPI.removeChild(x);
+            listAPI.removeChild(e.target);
         }
         
         /* Sets up the main menu */
