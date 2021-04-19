@@ -137,7 +137,17 @@
         }
 
         function addAPI(){
-            
+            let listAPI = document.getElementById("listAPI");
+            let storeAPI = [document.createElement("p"), document.createTextNode(document.getElementById("APIadd").value)];
+            storeAPI[0].onclick = () => removeP(this); 
+
+            listAPI.appendChild(storeAPI[0]);
+            storeAPI[0].appendChild(storeAPI[1]);
+        }
+
+        function removeP(x){
+            let listAPI = document.getElementById("listAPI");
+            listAPI.removeChild(x);
         }
         
         /* Sets up the main menu */
@@ -195,9 +205,10 @@
 
         <input id="APIadd"; type="text"; placeholder="Store API URL Here">
         <button id="addButton"; onclick ="addAPI()">Store Api</button>
+
         <div id="listAPI">
             <p>https://www.boredapi.com/api/activity</p>
-            <p>https://cat-fact.herokuapp.com/facts/random</p>
+            <p onclick="removeP(this)">https://cat-fact.herokuapp.com/facts/random</p>
         </div>
 
         <br>
