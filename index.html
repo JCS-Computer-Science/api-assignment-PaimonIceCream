@@ -18,6 +18,12 @@
             left: 50%;
             transform: translate(-50% , -50%);
         }
+        #welcome{
+            font: 40px "Bookman", "URW Bookman L", serif;
+        }
+        #description{
+            font: 25px Helvetica, sans-serif;
+        }
         #menuDiv{
             position: absolute;
             top: 50%;
@@ -27,11 +33,17 @@
             text-align: center;
         }
         #listAPI{
-            background-color: rgb(240, 239, 228);
+            background-color: rgb(253, 250, 229);
             height: 300px;
             width: 500px;
+            border: 2px solid rgb(15, 13, 102);
+            border-radius: 10px;
+            margin-top: 10px;
         }
-        #button{
+        p.stored-value{
+            color: rgb(75, 19, 19);
+        }
+        #mainButton{
             background-color: rgb(247, 228, 62);
             height: 100px;
             width: 200px;
@@ -54,6 +66,7 @@
         #errorID{
             transition: transform 1s;
         }
+
         @keyframes fadeIn{
             from {opacity: 0;}
             to {opacity: 1;}
@@ -140,6 +153,8 @@
             let listAPI = document.getElementById("listAPI");
             let storeAPI = [document.createElement("p"), document.createTextNode(document.getElementById("APIadd").value)];
             storeAPI[0].onclick = () => removeP(event);
+            storeAPI[0].onmouseover = () => {};
+            storeAPI[0].style.color = "rgb(75, 19, 19)";
 
             listAPI.appendChild(storeAPI[0]);
             storeAPI[0].appendChild(storeAPI[1]);
@@ -152,11 +167,11 @@
         
         /* Sets up the main menu */
         function setItUp(){
-            const buttonOne = document.getElementById("button")
+            const buttonOne = document.getElementById("mainButton")
             buttonOne.style.transform = "translateY(-100%)";
             buttonOne.style.animation = "fadeOut 1s";
             setTimeout(() => {
-                document.getElementById("button").style.display = "none";
+                document.getElementById("mainButton").style.display = "none";
 
                 const menudiv = document.getElementById("menuDiv");
                 menudiv.style.display = "inline";
@@ -174,31 +189,32 @@
             for(let i = 0; i < 6; i++){
                 color += letters[Math.floor(Math.random() * 16)];
             }
-            document.getElementById("button").style.backgroundColor = color;
+            document.getElementById("mainButton").style.backgroundColor = color;
  
             letters = "0123456789ABCDEF";
             color = '#';
             for(let i = 0; i < 6; i++){
                 color += letters[Math.floor(Math.random() * 16)];
             }
-            document.getElementById("button").style.borderColor = color;
+            document.getElementById("mainButton").style.borderColor = color;
         }, 750)
  
  
     </script>
     
     <div class="button">
-        <button id="button"; onclick = "setItUp()">Click Me</button>
+        <button id="mainButton"; onclick="setItUp()">Click Me</button>
     </div>
 
     <div id="menuDiv">
-        <h1>Welcome!</h1>
-        <h2>This is a little something that fetches data from an API.</h2>
+        <h1 id="welcome">Welcome!</h1>
+        <h2 id="description">This is a little something that fetches data from an API.</h2>
         <input id="fetchInput"; type="text" ; placeholder="Fetch API URL Here">
         
         <select onchange="fetchChange()"; id="keySelect">
             <option id="unselected"; value="unselected">Please Enter a URL</option>
         </select>
+
         <button id="submitButton"; onclick ="fetchHandler()">Submit</button>
 
         <br><br>
@@ -207,8 +223,8 @@
         <button id="addButton"; onclick ="addAPI()">Store Api</button>
 
         <div id="listAPI">
-            <p>https://www.boredapi.com/api/activity</p>
-            <p onclick="removeP(this)">https://cat-fact.herokuapp.com/facts/random</p>
+            <p class="stored-value">https://www.boredapi.com/api/activity</p>
+            <p class="stored-value">https://cat-fact.herokuapp.com/facts/random</p>
         </div>
 
         <br>
