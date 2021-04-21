@@ -19,10 +19,16 @@
             transform: translate(-50% , -50%);
         }
         #welcome{
+            
             font: 40px "Bookman", "URW Bookman L", serif;
+            background-color:rgb(242, 199, 255)
         }
-        #description{
-            font: 25px Helvetica, sans-serif;
+        #read-more{
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50% , -50%);
         }
         #menuDiv{
             position: absolute;
@@ -40,9 +46,23 @@
             border-radius: 10px;
             margin-top: 10px;
         }
+        #result-box{
+            background-color: rgb(253, 250, 229);
+            height: 50px;
+            width: 500px;
+            border: 2px solid rgb(15, 13, 102);
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
         p.stored-value{
             color: rgb(75, 19, 19);
+            
         }
+        p.stored-value:hover{
+            background-color: rgb(177, 186, 241);
+        }
+
         #mainButton{
             background-color: rgb(247, 228, 62);
             height: 100px;
@@ -62,9 +82,6 @@
             top: 50%;
             left: 50%;
             transform: translate(-50% , -50%);
-        }
-        #errorID{
-            transition: transform 1s;
         }
 
         @keyframes fadeIn{
@@ -127,7 +144,7 @@
                 .catch(error => {
                     console.log("ERROR");
                     console.error(error);
-                    document.getElementById("valueID").innerHTML = "Please submit a valid response";
+                    document.getElementById("valueID").innerHTML = "Please Submit a Valid Response";
                     let nodeList = document.getElementsByTagName("option").length;
             
                     for (var i = 0; i < nodeList; i++){
@@ -152,8 +169,8 @@
         function addAPI(){
             let listAPI = document.getElementById("listAPI");
             let storeAPI = [document.createElement("p"), document.createTextNode(document.getElementById("APIadd").value)];
-            storeAPI[0].onclick = () => removeP(event);
-            storeAPI[0].onmouseover = () => {};
+            storeAPI[0].className = "stored-value";
+            storeAPI[0].ondblclick = () => removeP(event);
             storeAPI[0].style.color = "rgb(75, 19, 19)";
 
             listAPI.appendChild(storeAPI[0]);
@@ -165,6 +182,22 @@
             listAPI.removeChild(e.target);
         }
         
+        function readMoreToggle(){
+            var b = true;
+            if(document.getElementById("menuDiv").style.display == "inline" && b == true){
+                document.getElementById("menuDiv").style.display = "none"
+                document.getElementById("read-more").style.display = "inline"
+                console.log("description screen is present");
+                b = false;
+            }
+            if(document.getElementById("menuDiv").style.display = "none" && b == true){
+                document.getElementById("menuDiv").style.display = "inline"
+                document.getElementById("read-more").style.display = "none"
+                console.log("main screen is present");
+                b = false;
+            }
+        }
+
         /* Sets up the main menu */
         function setItUp(){
             const buttonOne = document.getElementById("mainButton")
@@ -208,7 +241,9 @@
 
     <div id="menuDiv">
         <h1 id="welcome">Welcome!</h1>
-        <h2 id="description">This is a little something that fetches data from an API.</h2>
+        <h2 id="description"; style = "font: 25px Helvetica, sans-serif;">This is a little something that fetches data from an API.</h2>
+        <h3 onclick="readMoreToggle()"; style="color:blue;text-align:center;"><u>What's This About?</u></h3>
+
         <input id="fetchInput"; type="text" ; placeholder="Fetch API URL Here">
         
         <select onchange="fetchChange()"; id="keySelect">
@@ -223,18 +258,21 @@
         <button id="addButton"; onclick ="addAPI()">Store Api</button>
 
         <div id="listAPI">
-            <p class="stored-value">https://www.boredapi.com/api/activity</p>
-            <p class="stored-value">https://cat-fact.herokuapp.com/facts/random</p>
+            <p style="color:rgb(75, 19, 19)">https://www.boredapi.com/api/activity</p>
+            <p style="color:rgb(75, 19, 19)">https://cat-fact.herokuapp.com/facts/random</p>
         </div>
 
-        <br>
-        
     
+        <div id = "result-box">
+            <div id = "valueID"></div>
+        </div>
+        
 
-        <br>
-        <div id = "valueID"></div>
     </div>
     
+    <div id="read-more"; >
+        <button id="return"; onclick="readMoreToggle()">Go Back to the API Fetcher</button>
+    </div>
 </body>
  
 </html>
