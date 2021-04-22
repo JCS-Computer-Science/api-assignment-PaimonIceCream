@@ -19,9 +19,26 @@
             transform: translate(-50% , -50%);
         }
         #welcome{
-            
+            width:200px;
+            height:50px;
             font: 40px "Bookman", "URW Bookman L", serif;
-            background-color:rgb(242, 199, 255)
+            background-color:rgb(242, 199, 255);
+            position: relative;
+            left: 50%;
+            transform: translate(-50%);
+            border-style: outset;
+            border-radius: 6px;
+            border-width: 3px;
+            text-shadow: 1px 1px rgb(120, 122, 101);
+        }
+        #description{
+            font: 25px Helvetica, sans-serif;
+            background-color:rgb(199, 250, 255);
+            width:650px;
+            height:38px;
+            border-style: double;
+            border-radius: 10px;
+            border-width: 3px;
         }
         #read-more{
             display: none;
@@ -29,6 +46,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50% , -50%);
+            width: 700px;
         }
         #menuDiv{
             position: absolute;
@@ -45,14 +63,22 @@
             border: 2px solid rgb(15, 13, 102);
             border-radius: 10px;
             margin-top: 10px;
+            position: relative;
+            top:50%;
+            left: 50%;
+            transform: translate(-50%);
         }
         #result-box{
             background-color: rgb(253, 250, 229);
             height: 50px;
             width: 500px;
-            border: 2px solid rgb(15, 13, 102);
+            border: 2px solid green;
             border-radius: 10px;
             margin-top: 10px;
+            position: relative;
+            top:50%;
+            left: 50%;
+            transform: translate(-50%);
         }
 
         p.stored-value{
@@ -230,6 +256,7 @@
                 color += letters[Math.floor(Math.random() * 16)];
             }
             document.getElementById("mainButton").style.borderColor = color;
+            document.getElementById("welcome").style.borderColor = color;
         }, 750)
  
  
@@ -241,8 +268,8 @@
 
     <div id="menuDiv">
         <h1 id="welcome">Welcome!</h1>
-        <h2 id="description"; style = "font: 25px Helvetica, sans-serif;">This is a little something that fetches data from an API.</h2>
-        <h3 onclick="readMoreToggle()"; style="color:blue;text-align:center;"><u>What's This About?</u></h3>
+        <h2 id="description">This is a little something that fetches data from an API</h2>
+        <h3 onclick="readMoreToggle()"; style="color:blue; text-align:center;"><u>What's This About?</u></h3>
 
         <input id="fetchInput"; type="text" ; placeholder="Fetch API URL Here">
         
@@ -255,7 +282,7 @@
         <br><br>
 
         <input id="APIadd"; type="text"; placeholder="Store API URL Here">
-        <button id="addButton"; onclick ="addAPI()">Store Api</button>
+        <button id="addButton"; onclick ="addAPI()">Store API</button>
 
         <div id="listAPI">
             <p style="color:rgb(75, 19, 19)">https://www.boredapi.com/api/activity</p>
@@ -270,8 +297,42 @@
 
     </div>
     
-    <div id="read-more"; >
+    <div id="read-more">
         <button id="return"; onclick="readMoreToggle()">Go Back to the API Fetcher</button>
+        <p style="font-family: Arial, Helvetica, sans-serif;">
+            This main purpose of this site is to fetch data from an API through a URL. 
+            If you were to find a website containing API data, the data would be acconpanied by
+            a URL and would be stored as JSON data that would look similar
+            to the example below. 
+        </p>
+        <div style="width: 300px; 
+                    height:175px; 
+                    background-color: aliceblue;
+                    border-style: dashed;
+                    border-radius: 20px; 
+                    border-color: rgb(109, 114, 119);
+                    font-size: 20px;">
+            <p style="position: absolute; left: 62px;">
+                {<br>
+                    &nbsp &nbsp &nbsp "key": "value", <br>
+                    &nbsp &nbsp &nbsp "boolean": "true", <br>
+                    &nbsp &nbsp &nbsp "number": 10 <br>
+                }
+            </p>
+        </div>
+        <p style="font-family: Arial, Helvetica, sans-serif;">
+            Once you have obtained a copied valid URL, try it out on the API fetcher by pasting
+            it into the white bar that says <em style="background-color: aliceblue">Fetch API URL Here</em>
+            and clicking the <em style="background-color: aliceblue">Submit</em> button.
+            A valid URL would show the prompt <em style="background-color: aliceblue">Please Select a Key</em>
+            beside where you pasted the URL. That prompt would open a dropdown containing some keys. 
+            Each key corresponds to its respective value that will be seen in the box highlighted 
+            green at the very bottom of the API fetcher.
+        </p>
+
+        <p style="font-family: Arial, Helvetica, sans-serif;">
+            
+        </p>
     </div>
 </body>
  
