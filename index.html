@@ -7,261 +7,12 @@
  
     <title>Custom API Fetcher</title>
  
-    <!--<link rel="stylesheet" href="style.css">-->
-    <style>
-        body{
-            background-color: rgb(174, 228, 210);
-        }
-        div.button{
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50% , -50%);
-        }
-        #welcome{
-            width:200px;
-            height:50px;
-            font: 40px "Bookman", "URW Bookman L", serif;
-            background-color:rgb(242, 199, 255);
-            position: relative;
-            left: 50%;
-            transform: translate(-50%);
-            border-style: outset;
-            border-radius: 6px;
-            border-width: 3px;
-            text-shadow: 1px 1px rgb(120, 122, 101);
-        }
-        #description{
-            font: 25px Helvetica, sans-serif;
-            background-color:rgb(199, 250, 255);
-            width:650px;
-            height:38px;
-            border-style: double;
-            border-radius: 10px;
-            border-width: 3px;
-        }
-        #read-more{
-            display: none;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50% , -50%);
-            width: 700px;
-        }
-        #menuDiv{
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50% , -50%);
-            display: none;
-            text-align: center;
-        }
-        #listAPI{
-            background-color: rgb(253, 250, 229);
-            height: 300px;
-            width: 500px;
-            border: 2px solid rgb(15, 13, 102);
-            border-radius: 10px;
-            margin-top: 10px;
-            position: relative;
-            top:50%;
-            left: 50%;
-            transform: translate(-50%);
-        }
-        #result-box{
-            background-color: rgb(253, 250, 229);
-            height: 50px;
-            width: 500px;
-            border: 2px solid green;
-            border-radius: 10px;
-            margin-top: 10px;
-            position: relative;
-            top:50%;
-            left: 50%;
-            transform: translate(-50%);
-        }
-
-        p.stored-value{
-            color: rgb(75, 19, 19);
-            
-        }
-        p.stored-value:hover{
-            background-color: rgb(177, 186, 241);
-        }
-
-        #mainButton{
-            background-color: rgb(247, 228, 62);
-            height: 100px;
-            width: 200px;
-            border: 6px double cadetblue;
-            border-radius: 10px;
-            font-family: Arial, sans-serif;
-            font-size: 25px;
-            text-shadow: 1px 1px green;
-            transition: transform 1s;
-        }
-        #promiseHere{
-            font-family: Arial, sans-serif;
-            font-size: 25px;
-            color:blue;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50% , -50%);
-        }
-
-        @keyframes fadeIn{
-            from {opacity: 0;}
-            to {opacity: 1;}
-        }
-        @keyframes fadeOut{
-            from {opacity: 1;}
-            to {opacity: 0;}
-        }
-    </style>
-    
+    <link rel="stylesheet" href="style.css">
 </head>
  
 <body>
-    <!--<script src="app.js"></script>--> 
-    <script>
-        // Global variables
-        var globalJSON;
-        var removeBoolean;
+    <script src="app.js"></script> 
 
-        function fetchHandler() {
-            var url = document.getElementById("fetchInput").value;
-            
-            fetch(url)  
-                .then(response => { 
-                    document.getElementById("valueID").innerHTML = " ";
-                    return response.json();
-                })   
-                .then(response => {
-                    let nodeList = document.getElementsByTagName("option").length;
-                    
-                    for (var i = 0; i < nodeList; i++){
-                        let select = document.getElementById("keySelect");
-                        select.remove(0);
-                    }
-
-                    const unselectedOption = document.createElement("option");
-                    unselectedOption.id = "unselected";
-                    unselectedOption.value = "unselcted";
-                    unselectedOption.textContent = "Please Select a Key";
-                    document.getElementById("keySelect").appendChild(unselectedOption);
-
-                    let result = Object.keys(response);
-                    
-                    const dropdown = document.getElementById("keySelect");
-                    result.forEach((key) =>  {
-                        
-                        let option = document.createElement("option");
-                        option.id = key;
-                        option.value = key;
-                        option.textContent = key;
-                        dropdown.appendChild(option);
-                    })
-
-                    globalJSON = response;
-                    removeBoolean = true;
-                    
-                }) 
-                .catch(error => {
-                    console.log("ERROR");
-                    console.error(error);
-                    document.getElementById("valueID").innerHTML = "Please Submit a Valid Response";
-                    let nodeList = document.getElementsByTagName("option").length;
-            
-                    for (var i = 0; i < nodeList; i++){
-                        let select = document.getElementById("keySelect");
-                        select.remove(0);
-                    }
-                });        
-        }
-
-        function fetchChange(){
-            if(removeBoolean == true){
-                let select = document.getElementById("keySelect");
-                select.remove(0);
-                removeBoolean = false;
-            }
-            var whichKey = document.getElementById("keySelect").value;
-            document.getElementById("valueID").innerHTML = globalJSON[whichKey];
-            globalJSON[whichKey]
-            console.log(globalJSON);
-        }
-
-        function addAPI(){
-            let listAPI = document.getElementById("listAPI");
-            let storeAPI = [document.createElement("p"), document.createTextNode(document.getElementById("APIadd").value)];
-            storeAPI[0].className = "stored-value";
-            storeAPI[0].ondblclick = () => removeP(event);
-            storeAPI[0].style.color = "rgb(75, 19, 19)";
-
-            listAPI.appendChild(storeAPI[0]);
-            storeAPI[0].appendChild(storeAPI[1]);
-        }
-
-        function removeP(e){
-            let listAPI = document.getElementById("listAPI");
-            listAPI.removeChild(e.target);
-        }
-        
-        function readMoreToggle(){
-            var b = true;
-            if(document.getElementById("menuDiv").style.display == "inline" && b == true){
-                document.getElementById("menuDiv").style.display = "none"
-                document.getElementById("read-more").style.display = "inline"
-                console.log("description screen is present");
-                b = false;
-            }
-            if(document.getElementById("menuDiv").style.display = "none" && b == true){
-                document.getElementById("menuDiv").style.display = "inline"
-                document.getElementById("read-more").style.display = "none"
-                console.log("main screen is present");
-                b = false;
-            }
-        }
-
-        /* Sets up the main menu */
-        function setItUp(){
-            const buttonOne = document.getElementById("mainButton")
-            buttonOne.style.transform = "translateY(-100%)";
-            buttonOne.style.animation = "fadeOut 1s";
-            setTimeout(() => {
-                document.getElementById("mainButton").style.display = "none";
-
-                const menudiv = document.getElementById("menuDiv");
-                menudiv.style.display = "inline";
-                menuDiv.style.animation = "fadeIn 1s";
-            }, 900);
-            
-            
-        }
-
- 
-        // Changes the colour of the button
-        setInterval(() => {
-            var letters = "0123456789ABCDEF";
-            var color = '#';
-            for(let i = 0; i < 6; i++){
-                color += letters[Math.floor(Math.random() * 16)];
-            }
-            document.getElementById("mainButton").style.backgroundColor = color;
- 
-            letters = "0123456789ABCDEF";
-            color = '#';
-            for(let i = 0; i < 6; i++){
-                color += letters[Math.floor(Math.random() * 16)];
-            }
-            document.getElementById("mainButton").style.borderColor = color;
-            document.getElementById("welcome").style.borderColor = color;
-        }, 750)
- 
- 
-    </script>
-    
     <div class="button">
         <button id="mainButton"; onclick="setItUp()">Click Me</button>
     </div>
@@ -288,23 +39,22 @@
             <p style="color:rgb(75, 19, 19)">https://www.boredapi.com/api/activity</p>
             <p style="color:rgb(75, 19, 19)">https://cat-fact.herokuapp.com/facts/random</p>
         </div>
-
     
         <div id = "result-box">
             <div id = "valueID"></div>
         </div>
-        
-
     </div>
     
     <div id="read-more">
         <button id="return"; onclick="readMoreToggle()">Go Back to the API Fetcher</button>
+
         <p style="font-family: Arial, Helvetica, sans-serif;">
             This main purpose of this site is to fetch data from an API through a URL. 
             If you were to find a website containing API data, the data would be acconpanied by
             a URL and would be stored as JSON data that would look similar
             to the example below. 
         </p>
+
         <div style="width: 300px; 
                     height:175px; 
                     background-color: aliceblue;
@@ -320,6 +70,7 @@
                 }
             </p>
         </div>
+
         <p style="font-family: Arial, Helvetica, sans-serif;">
             Once you have obtained a copied valid URL, try it out on the API fetcher by pasting
             it into the white bar that says <em style="background-color: aliceblue">Fetch API URL Here</em>
@@ -331,7 +82,16 @@
         </p>
 
         <p style="font-family: Arial, Helvetica, sans-serif;">
-            
+            You may also choose to store any URLs you come across on the API fetcher for later use.
+            Once you have copied a URL, paste it in the box with the prompt <em style="background-color: aliceblue">
+            Store API URL Here</em> and click the <em style="background-color: aliceblue">Store API</em> button 
+            to store it in the list below. The URL will show in the list and can be selectable for copying and pasting
+            for fetching data. If you wish to remove a URL from the list, you can double click the URL to clear it.
+        </p>
+
+        <p style="font-family: Arial, Helvetica, sans-serif;">
+            The first two URLs in the list are examples that you can try out and cannot be removed from the list.
+            Have fun!
         </p>
     </div>
 </body>

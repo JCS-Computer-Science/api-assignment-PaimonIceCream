@@ -7,6 +7,36 @@ div.button{
     left: 50%;
     transform: translate(-50% , -50%);
 }
+#welcome{
+    width:200px;
+    height:50px;
+    font: 40px "Bookman", "URW Bookman L", serif;
+    background-color:rgb(242, 199, 255);
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+    border-style: outset;
+    border-radius: 6px;
+    border-width: 3px;
+    text-shadow: 1px 1px rgb(120, 122, 101);
+}
+#description{
+    font: 25px Helvetica, sans-serif;
+    background-color:rgb(199, 250, 255);
+    width:650px;
+    height:38px;
+    border-style: double;
+    border-radius: 10px;
+    border-width: 3px;
+}
+#read-more{
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50% , -50%);
+    width: 700px;
+}
 #menuDiv{
     position: absolute;
     top: 50%;
@@ -16,11 +46,49 @@ div.button{
     text-align: center;
 }
 #listAPI{
-    background-color: rgb(240, 239, 228);
+    background-color: rgb(253, 250, 229);
     height: 300px;
     width: 500px;
+    border: 2px solid rgb(15, 13, 102);
+    border-radius: 10px;
+    margin-top: 10px;
+    position: relative;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%);
+    overflow: hidden;
+    overflow-y: scroll;
+    word-wrap: break-word;
 }
-#button{
+::-webkit-scrollbar{
+    width: 15px;
+}
+::-webkit-scrollbar-thumb {
+    background:rgba(104, 102, 195, 0.476); 
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(104, 102, 195, 0918); 
+}
+#result-box{
+    background-color: rgb(253, 250, 229);
+    height: 50px;
+    width: 500px;
+    border: 2px solid green;
+    border-radius: 10px;
+    margin-top: 10px;
+    position: relative;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%);
+}
+p.stored-value{
+    color: rgb(75, 19, 19);
+}
+p.stored-value:hover{
+    background-color: rgb(177, 186, 241);
+}
+#mainButton{
     background-color: rgb(247, 228, 62);
     height: 100px;
     width: 200px;
@@ -39,9 +107,6 @@ div.button{
     top: 50%;
     left: 50%;
     transform: translate(-50% , -50%);
-}
-#errorID{
-    transition: transform 1s;
 }
 @keyframes fadeIn{
     from {opacity: 0;}
