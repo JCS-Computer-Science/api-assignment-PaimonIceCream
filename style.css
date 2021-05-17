@@ -68,7 +68,7 @@ div.button{
     border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: rgba(104, 102, 195, 0.918); 
+    background: rgba(104, 102, 195, 0918); 
 }
 #result-box{
     background-color: rgb(253, 250, 229);
